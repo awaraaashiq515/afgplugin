@@ -9,14 +9,6 @@ if (!defined('ABSPATH')) {
 }
 
 global $wpdb;
-if (!defined('ABSPATH')) {
-    exit;
-}
-
-global $wpdb;
-
-// ✅ Add this line to fix undefined variable
-$currency = get_woocommerce_currency_symbol();
 
 // Get today's sales from WooCommerce orders
 $today_sales = 0;
@@ -33,10 +25,7 @@ foreach ($today_orders as $order) {
     $today_sales += floatval($order->get_total());
 }
 
-// ✅ Format with currency symbol
-$today_sales_display = wc_price($today_sales);
-
-$today_sales = $today_sales ? floatval($today_sales) : 0;
+ $today_sales_display = wc_price($today_sales);
 
 // Active trainees
 $active_trainees = count(get_users(array('role' => 'customer')));

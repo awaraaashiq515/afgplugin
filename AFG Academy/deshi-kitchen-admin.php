@@ -93,8 +93,8 @@ class Deshi_Kitchen_Admin {
         // Admin classes
         require_once DKM_ADMIN_PLUGIN_DIR . 'admin/class-admin-menu.php';
         
-        // Public classes (for shortcodes)
-        // require_once DKM_ADMIN_PLUGIN_DIR . 'public/class-public-pages.php';
+         // Public classes (for shortcodes)
+         require_once DKM_ADMIN_PLUGIN_DIR . 'public/class-public-pages.php';
     }
     
     /**

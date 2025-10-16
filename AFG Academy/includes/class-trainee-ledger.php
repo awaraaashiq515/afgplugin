@@ -210,46 +210,46 @@ class DKM_Trainee_Ledger {
         return $trainees_data;
     }
     
-    /**
-     * Search trainees by name, email or phone
-     */
-// public static function search_trainees($search_term) {
-//     $args = array(
-//         'role' => 'customer',
-//         'search' => '*' . esc_attr($search_term) . '*',
-//         'search_columns' => array('user_login', 'user_email', 'display_name'),
-//         'number' => 20
-//     );
-    
-//     $users = get_users($args);
-//     $results = array();
-    
-//     foreach ($users as $user) {
-//         $phone = get_user_meta($user->ID, 'billing_phone', true);
+     /**
+      * Search trainees by name, email or phone
+      */
+    public static function search_trainees($search_term) {
+        $args = array(
+            'role' => 'customer',
+            'search' => '*' . esc_attr($search_term) . '*',
+            'search_columns' => array('user_login', 'user_email', 'display_name'),
+            'number' => 20
+        );
         
-//         // Check if search term matches name, email, OR phone
-//         $name_match = stripos($user->display_name, $search_term) !== false;
-//         $email_match = stripos($user->user_email, $search_term) !== false;
-//         $phone_match = !empty($phone) && stripos($phone, $search_term) !== false;
+        $users = get_users($args);
+        $results = array();
         
-//         // Skip if no match found
-//         if (!$name_match && !$email_match && !$phone_match) {
-//             continue;
-//         }
+        foreach ($users as $user) {
+            $phone = get_user_meta($user->ID, 'billing_phone', true);
+            
+            $name_match = stripos($user->display_name, $search_term) !== false;
+            $email_match = stripos($user->user_email, $search_term) !== false;
+            $phone_match = !empty($phone) && stripos($phone, $search_term) !== false;
+            
+            if (!$name_match && !$email_match && !$phone_match) {
+                continue;
+            }
+            
+            $balance = self::get_balance($user->ID);
+            
+            $results[] = array(
+                'id' => $user->ID,
+                'trainee_id' => $user->ID,
+                'name' => $user->display_name,
+                'email' => $user->user_email,
+                'phone' => $phone,
+                'balance' => $balance,
+                'balance_status' => self::get_balance_status($balance)
+            );
+        }
         
-//         $balance = self::get_balance($user->ID);
-        
-//         $results[] = array(
-//             'name' => $user->display_name,
-//             'email' => $user->user_email,
-//             'phone' => $phone,
-//             'balance' => $balance,
-//             'balance_status' => self::get_balance_status($balance)
-//         );
-//     }
-    
-//     return $results;
-// }    
+        return $results;
+    }
     /**
      * Get balance status (ok, warning, critical)
      */
@@ -395,10 +395,9 @@ public static function search_trainees($search_term) {
         
         $balance = self::get_balance($user->ID);
         
-        // ✅ FIX: Return proper structure with 'id' field
         $results[] = array(
-            'id' => $user->ID,                    // ✅ ADD THIS!
-            'trainee_id' => $user->ID,            // ✅ AND THIS!
+            'id' => $user->ID,
+            'trainee_id' => $user->ID,
             'name' => $user->display_name,
             'email' => $user->user_email,
             'phone' => $phone,
@@ -409,48 +408,41 @@ public static function search_trainees($search_term) {
     
     return $results;
 }    
-    /**
-     * AJAX: Get trainee balance
-     */
-// ✅ NEW CODE (Fixed)
-// KPOS_Handler class mein
-/**
- * AJAX: Get trainee balance - FIXED VERSION
- */
-public static function ajax_get_trainee_balance() {
-    check_ajax_referer('dkm_admin_nonce', 'nonce');
-    
-    $trainee_id = isset($_POST['trainee_id']) ? intval($_POST['trainee_id']) : 0;
-    
-    if (!$trainee_id) {
-        wp_send_json_error(array(
-            'message' => 'Trainee ID required'
+     /**
+      * AJAX: Get trainee balance
+      */
+    public static function ajax_get_trainee_balance() {
+        check_ajax_referer('dkm_admin_nonce', 'nonce');
+        
+        $trainee_id = isset($_POST['trainee_id']) ? intval($_POST['trainee_id']) : 0;
+        
+        if (!$trainee_id) {
+            wp_send_json_error(array(
+                'message' => 'Trainee ID required'
+            ));
+        }
+        
+        $user = get_userdata($trainee_id);
+        if (!$user) {
+            wp_send_json_error(array(
+                'message' => 'Trainee not found'
+            ));
+        }
+        
+        $balance = self::get_balance($trainee_id);
+        $summary = self::get_summary($trainee_id);
+        
+        wp_send_json_success(array(
+            'trainee_id' => $trainee_id,
+            'id' => $trainee_id,
+            'name' => $user->display_name,
+            'email' => $user->user_email,
+            'phone' => get_user_meta($trainee_id, 'billing_phone', true),
+            'balance' => $balance,
+            'summary' => $summary,
+            'credit_limit' => get_option('dkm_credit_limit', 5000)
         ));
     }
-    
-    // ✅ CHECK IF USER EXISTS
-    $user = get_userdata($trainee_id);
-    if (!$user) {
-        wp_send_json_error(array(
-            'message' => 'Trainee not found'
-        ));
-    }
-    
-    $balance = self::get_balance($trainee_id);
-    $summary = self::get_summary($trainee_id);
-    
-    // ✅ RETURN COMPLETE DATA
-    wp_send_json_success(array(
-        'trainee_id' => $trainee_id,      // ✅ IMPORTANT!
-        'id' => $trainee_id,               // ✅ ALSO ADD THIS
-        'name' => $user->display_name,
-        'email' => $user->user_email,
-        'phone' => get_user_meta($trainee_id, 'billing_phone', true),
-        'balance' => $balance,
-        'summary' => $summary,
-        'credit_limit' => get_option('dkm_credit_limit', 5000)
-    ));
-}/**
      * AJAX: Add manual payment
      */
     public static function ajax_add_manual_payment() {
