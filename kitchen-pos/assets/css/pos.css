@@ -1,0 +1,931 @@
+/* ========================================
+   Kitchen POS - Stylesheet
+   ======================================== */
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.kpos-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Header */
+.kpos-header {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.kpos-logo h1 {
+    font-size: 24px;
+    color: #2271b1;
+    margin: 0;
+}
+
+.kpos-subtitle {
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.kpos-user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.kpos-operator-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.kpos-datetime {
+    color: #666;
+    font-size: 14px;
+}
+
+.kpos-logout {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #dc3232;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.kpos-logout:hover {
+    background: #ffe6e6;
+}
+
+/* Container Layout */
+.kpos-container {
+    display: grid;
+    grid-template-columns: 320px 1fr 380px;
+    gap: 20px;
+    padding: 20px;
+    height: calc(100vh - 80px);
+}
+
+/* Panels */
+.kpos-left-panel,
+.kpos-center-panel,
+.kpos-right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.kpos-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.kpos-section h3 {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    color: #2271b1;
+}
+
+/* Search Box */
+.kpos-search-box {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.kpos-search-box input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.kpos-search-box input:focus {
+    outline: none;
+    border-color: #2271b1;
+}
+
+.kpos-search-box .dashicons {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+/* Trainee Search Results */
+.kpos-search-results {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.trainee-result-item {
+    padding: 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.trainee-result-item:hover {
+    background: #f0f6fc;
+    border-color: #2271b1;
+}
+
+.trainee-result-item h4 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+}
+
+.trainee-result-item p {
+    margin: 2px 0;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Selected Trainee Card */
+.kpos-selected-trainee {
+    margin-top: 15px;
+}
+
+.trainee-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f0f6fc;
+    border-radius: 8px;
+    position: relative;
+}
+
+.trainee-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #2271b1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.trainee-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.trainee-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.trainee-info p {
+    margin: 2px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.kpos-btn-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #dc3232;
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kpos-btn-remove:hover {
+    background: #b52727;
+}
+
+/* Trainee Balance */
+.trainee-balance {
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #e5e5e5;
+}
+
+.balance-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.balance-item:last-child {
+    margin-bottom: 0;
+}
+
+.balance-amount {
+    font-size: 18px;
+}
+
+.balance-amount.positive {
+    color: #46b450;
+}
+
+.balance-amount.negative {
+    color: #dc3232;
+}
+
+/* Products Grid */
+.kpos-section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.kpos-category-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.kpos-category-btn {
+    padding: 8px 16px;
+    border: 2px solid #e5e5e5;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.kpos-category-btn:hover,
+.kpos-category-btn.active {
+    background: #2271b1;
+    color: white;
+    border-color: #2271b1;
+}
+
+.kpos-product-search input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.kpos-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    overflow-y: auto;
+    flex: 1;
+    padding: 5px;
+}
+
+.product-card {
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    background: white;
+}
+
+.product-card:hover {
+    border-color: #2271b1;
+    box-shadow: 0 4px 12px rgba(34,113,177,0.2);
+    transform: translateY(-2px);
+}
+
+.product-card.out-of-stock {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.product-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #f5f7fa;
+}
+
+.product-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    height: 36px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #2271b1;
+    font-weight: bold;
+}
+
+.product-stock {
+    font-size: 11px;
+    color: #999;
+    margin-top: 5px;
+}
+
+/* Cart Items */
+/* Right Panel Section - FIXED LAYOUT */
+.kpos-right-panel .kpos-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    padding-right: 8px; /* optional - for spacing */
+}
+.kpos-right-panel .kpos-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.kpos-right-panel .kpos-section::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.kpos-right-panel .kpos-section::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.kpos-right-panel h3 {
+    flex-shrink: 0;
+}
+.kpos-empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.kpos-empty-cart .dashicons {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+.kpos-empty-cart p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #fafafa;
+}
+
+.cart-item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: white;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.cart-item-price {
+    font-size: 13px;
+    color: #666;
+}
+
+.cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qty-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e5e5e5;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.qty-btn:hover {
+    background: #2271b1;
+    color: white;
+    border-color: #2271b1;
+}
+
+.qty-value {
+    width: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cart-item-remove {
+    background: #dc3232;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-remove:hover {
+    background: #b52727;
+}
+
+/* Cart Summary */
+.kpos-cart-summary {
+    background: #f5f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.summary-row.total {
+    font-size: 18px;
+    padding-top: 10px;
+    border-top: 2px solid #ddd;
+    margin-bottom: 0;
+}
+
+/* Payment Methods */
+.kpos-payment-methods {
+    margin-bottom: 15px;
+}
+
+.kpos-payment-methods h4 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.payment-option {
+    position: relative;
+    cursor: pointer;
+}
+
+.payment-option input {
+    position: absolute;
+    opacity: 0;
+}
+
+.payment-option span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 12px;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 12px;
+    transition: all 0.2s;
+    background: white;
+}
+
+.payment-option input:checked + span {
+    background: #2271b1;
+    color: white;
+    border-color: #2271b1;
+}
+
+.payment-option .dashicons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+/* Order Note */
+.kpos-order-note textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* Action Buttons */
+.kpos-actions {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+}
+
+.kpos-btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.kpos-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.kpos-btn-primary {
+    background: #46b450;
+    color: white;
+}
+
+.kpos-btn-primary:hover:not(:disabled) {
+    background: #3a9a43;
+    box-shadow: 0 4px 12px rgba(70,180,80,0.3);
+}
+
+.kpos-btn-secondary {
+    background: #f0f0f1;
+    color: #666;
+}
+
+.kpos-btn-secondary:hover {
+    background: #dcdcde;
+}
+
+/* Modal */
+.kpos-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.kpos-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kpos-modal-header {
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.kpos-modal-header.success {
+    background: #f0f9f1;
+}
+
+.kpos-modal-header .dashicons {
+    width: 64px;
+    height: 64px;
+    font-size: 64px;
+    color: #46b450;
+    margin-bottom: 15px;
+}
+
+.kpos-modal-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.kpos-modal-body {
+    padding: 30px;
+}
+
+.order-success-details p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.order-success-details p:last-child {
+    margin-bottom: 0;
+}
+
+.kpos-modal-footer {
+    padding: 20px 30px;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Loading & No Data */
+.kpos-loading {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+
+.kpos-loading .dashicons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.kpos-no-data {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 13px;
+}
+
+/* Recent Orders */
+.kpos-recent-orders {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.recent-order-item {
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.recent-order-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #2271b1;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .kpos-container {
+        grid-template-columns: 280px 1fr 350px;
+    }
+    
+    .kpos-products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+}
+/* POS Additional Styles */
+
+/* Product card loading state */
+.product-card.adding {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.product-card.adding::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success Notification */
+.kpos-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 99999;
+    font-size: 14px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+}
+
+.kpos-notification.success {
+    background: #28a745;
+    color: white;
+}
+
+.kpos-notification.error {
+    background: #dc3545;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Product image error handling */
+.product-image {
+    background-color: #f5f7fa;
+    min-height: 150px;
+    object-fit: cover;
+}
+
+/* Cart item image */
+.cart-item-image {
+    background-color: #f5f7fa;
+    min-height: 50px;
+    object-fit: cover;
+}
+
+/* Better button states */
+.kpos-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.kpos-btn-primary:disabled {
+    background: #ccc !important;
+}
+
+/* Quantity buttons */
+.qty-btn {
+    transition: all 0.2s ease;
+}
+
+.qty-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+.qty-btn:active {
+    transform: scale(0.95);
+}
+
+/* Product card hover effect */
+.product-card:not(.out-of-stock):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+.product-card.out-of-stock {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Loading spinner animation */
+.dashicons.spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Cart empty state */
+.kpos-empty-cart {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.kpos-empty-cart .dashicons {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+/* Payment method selection */
+.payment-option input[type="radio"]:checked + span {
+    border-color: #2271b1;
+    background: #f0f6fc;
+}
+
+/* Trainee balance colors */
+.balance-amount.positive {
+    color: #28a745;
+}
+
+.balance-amount.negative {
+    color: #dc3545;
+}
+
+/* Recent orders styling */
+.recent-order-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+
+.recent-order-item:last-child {
+    border-bottom: none;
+}
+
+/* Modal overlay */
+.kpos-modal {
+    background: rgba(0,0,0,0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .kpos-notification {
+        right: 10px;
+        left: 10px;
+        top: 10px;
+    }
+}
