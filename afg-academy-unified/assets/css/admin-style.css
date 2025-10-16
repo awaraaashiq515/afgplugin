@@ -1,0 +1,46 @@
+/* AFG Academy Admin Styles */
+
+.dkm-admin-page {
+    /* Custom admin page styles */
+}
+
+.wrap h1 {
+    color: #23282d;
+}
+
+.form-table th {
+    font-weight: 600;
+}
+
+.button-primary {
+    background: #0073aa;
+    border-color: #0073aa;
+}
+
+.notice {
+    margin: 20px 0;
+}
+
+.dkm-dashboard-widget {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.dkm-stat {
+    display: inline-block;
+    margin-right: 30px;
+    text-align: center;
+}
+
+.dkm-stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0073aa;
+}
+
+.dkm-stat-label {
+    color: #666;
+    font-size: 14px;
+}

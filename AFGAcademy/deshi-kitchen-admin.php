@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AFG Academy
+ * Plugin Name: AFGAcademy
  * Plugin URI: https://afgacademy.com/
  * Description: Complete kitchen management system with trainee ledger, invoicing, and WooCommerce integration
  * Version: 2.0.0
